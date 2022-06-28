@@ -127,3 +127,52 @@ def game_hash
 end
 
 # Write code here
+def player_stats(player_name)
+  #game_hash
+  game_hash.each do |location, team_data|
+    team_data.each do |key, data|
+      if key.to_s == 'players'
+        data.each do |player|
+          if player[:'player_name'] == player_name
+            return player
+          end
+        end
+      end
+    end
+    
+  end
+    
+end
+      #players.each do |player|
+        #if player[player_name] == xyz
+          #pp player
+
+def num_points_scored(player_name)
+  stats = player_stats player_name
+  points = stats[:points]
+end
+def shoe_size player_name
+  stats = player_stats player_name
+  shoe_size = stats[:shoe]
+end
+def team_colors team 
+  game_hash.each do |side, team_data|
+    if team_data[:team_name] == team
+        return team_data[:colors]
+    end
+  end
+end
+def team_names 
+  names = []
+  game_hash.each do |side, team_data|
+    names.push team_data[:team_name]
+  end
+  names
+end
+
+def player_numbers player_name
+  stats = player_stats player_name
+  number = stats[:number]
+end
+puts player_stats 'Kemba Walker'
+puts player_numbers 'Kemba Walker'
