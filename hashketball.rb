@@ -127,3 +127,99 @@ def game_hash
 end
 
 # Write code here
+def player_stats(player_name)
+  #game_hash
+  game_hash.each do |location, team_data|
+    team_data.each do |key, data|
+      if key.to_s == 'players'
+        data.each do |player|
+          if player[:'player_name'] == player_name
+            return player
+          end
+        end
+      end
+    end
+    
+  end
+    
+end
+      #players.each do |player|
+        #if player[player_name] == xyz
+          #pp player
+
+def num_points_scored(player_name)
+  stats = player_stats player_name
+  points = stats[:points]
+end
+def shoe_size player_name
+  stats = player_stats player_name
+  shoe_size = stats[:shoe]
+end
+def team_colors team 
+  game_hash.each do |side, team_data|
+    if team_data[:team_name] == team
+        return team_data[:colors]
+    end
+  end
+end
+def team_names 
+  names = []
+  game_hash.each do |side, team_data|
+    names.push team_data[:team_name]
+  end
+  names
+end
+
+def player_numbers team_name
+  numbers = []
+  game_hash.each do |side, team_data|
+    if team_data[:team_name] == team_name
+      team_data[:players].each do |player|
+        numbers.push player[:number]
+      end
+    end
+  end
+  numbers
+end
+
+def big_shoe_rebounds 
+  bigShoe = 0
+  rebounds = 0
+  game_hash.each do |side, team_data|
+    team_data[:players].each do |player|
+      if bigShoe < player[:shoe]
+        bigShoe = player[:shoe]
+        rebounds = player[:rebounds]
+      end
+    end
+  end
+  rebounds
+end
+
+def most_points_scored 
+  points = 0
+  playerWithMostPoints = nil
+  game_hash.each do |side, team_data|
+    team_data[:players].each do |player|
+      if points < player[:points]
+        playerWithMostPoints = player
+        points = player[:points]
+      end
+    end
+  end
+  playerWithMostPoints
+end
+def winning_team 
+  pointsHome = 0
+  pointsAway = 0
+  game_hash[:home][:players].each do |player|
+    pointsHome += player[:points]
+  end
+  game_hash[:away][:players].each do |player|
+    pointsAway += player[:points]
+  end
+  (pointsAway < pointsHome)? 'Home': 'Away'
+end
+
+puts winning_team
+
